@@ -23,20 +23,20 @@ def calculator(a, b, operator) :
         if b != 0 :
             result = a / b
         else :
-            print(f"Enter another number (b) not nul")  
+            print(f"Erreur : division par zéro")  
 
 
     elif operator == '//' :
         if b != 0 :
             result = a // b
         else :
-            print(f"Enter another number (b) not nul")
+            print(f"Erreur : division par zéro")
 
     elif operator == '%' :
         if b != 0 : 
             result = a % b
         else :
-            print(f"Enter another number (b) not nul") 
+            print(f"Erreur : division par zéro") 
 
     print(f"The result of this operation is :{result}")
 
