@@ -2,6 +2,8 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
+
+
 ########################################################################
 #define the functions :
 # 1 - Define a basic calculator with basic operators : +, x,
@@ -66,7 +68,7 @@ def science_calculator(a, operator) :
     #If we create the dictionnary in this way : dict ={'cos' : np.cos(a)}, that means that this operation is done before we call it in the input bloc
     #The solution is to make these functions (operators) as a lambda function or like a reference, then at the end we put it like an arguments in operators.get()
     result = operators.get(operator, lambda:  "Unfound operation")()  #execute the lambda function
-    return f"The result of this operation is : {result}"
+    return result #it return a numerical variable, that I can use in the condition down (to round the result if necessary)
      #the programm recuperate the key : operator from the dictionnary operators, if the operator doen't exist, the function return : Unfound operation
 
 ################################################################################################################################
@@ -97,7 +99,9 @@ try :
                 operate = input(f"Enter the operation symbol 'cos'  'sin'  'tan'   'cosh'  'sinh'  'tanh' : ").strip()
                 number = float(input(f"Enter a number of your choice n : "))
                 result2 = science_calculator(np.radians(number), operate)
-                print(result2)
+                if result2 < 10^-10 :
+                    result2 = 0.0 
+                print(f"The result of this operation is : {result2}")
 
             elif choice3 == 'TIF' :
                 operate = input(f"Enter the operation symbol 'arccos'  'arcsin'  'arctan'  'arccosh' 'arcsinh'  'arctanh' : ").strip()
