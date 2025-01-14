@@ -38,7 +38,7 @@ def calculator(a, b, operator) :
         else :
             result = "Zero Division Error ! Enter another number b " 
 
-    return print(f"The result of the operation : a {operator} b = {result}")
+    return "The result of the operation : a {operator} b = {result}"
 
     ##Add the numpy functions : cos, sin, log, exp n! .....
 
