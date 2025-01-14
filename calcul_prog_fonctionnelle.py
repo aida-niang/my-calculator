@@ -70,7 +70,7 @@ def science_calculator(a, operators) :
 try :
 #Ask the user to choose between two types of operators :
     print(f"Welcome to our calculator ! ")
-    choice = input(f"Choose the calculator type (basic / scientific) :").strip().lower().upper()
+    choice = input(f"Choose the calculator type (basic / scientific) :").strip().lower()
 
     if choice == 'basic' :
         operate = input(f"Enter the operation symbol '+'  '-'  'x'  '/'  '//'  '%' : ")
