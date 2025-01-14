@@ -20,31 +20,19 @@ def calculator(a, b, operator) :
             result = a / b
         else :
             result = "Zero Division Error ! Enter another number b " 
-<<<<<<< HEAD
-=======
-
->>>>>>> ab38381 (add a try-except bloc, correct the functuin structure by adding return at the end in order the cariable result will be recognized, change the printed message in case of zero devision error)
 
     elif operator == '//' :
         if b != 0 :
             result = a // b
         else :
             result = "Zero Division Error ! Enter another number b "
-<<<<<<< HEAD
-=======
-
->>>>>>> ab38381 (add a try-except bloc, correct the functuin structure by adding return at the end in order the cariable result will be recognized, change the printed message in case of zero devision error)
     elif operator == '%' :
         if b != 0 : 
             result = a % b
         else :
             result = "Zero Division Error ! Enter another number b " 
 
-<<<<<<< HEAD
     return "The result of the operation : a {operator} b = {result}"
-=======
-    return print(f"The result of the operation : a {operator} b = {result}")
->>>>>>> ab38381 (add a try-except bloc, correct the functuin structure by adding return at the end in order the cariable result will be recognized, change the printed message in case of zero devision error)
 
 
 # 2 - Define a scientific calculator due to the library numpy :
@@ -55,18 +43,14 @@ def science_calculator(a, b, opertor_s) :
         'cos' : np.cos(a),
         'sin' : np.sin(a),
         'tan' : np.tan(a)
-        'sinh' :
+        'sinh' : np.sin(a)
     }
 
 #Ask the use the enter the values and the operator :
 try :
     number1 = int(input(f"Enter a first number a : "))
     number2 = int(input(f"Enter a second number b : "))
-<<<<<<< HEAD
     operate = input(f"Enter the operation symbol '+'  '-'  'x'  '/'  '//'  '%' : ")
-=======
-    operate = input(f"Enter the operation symbol '+'  '-'  '*'  '/'  '//'  '%' : ")
->>>>>>> ab38381 (add a try-except bloc, correct the functuin structure by adding return at the end in order the cariable result will be recognized, change the printed message in case of zero devision error)
 
     calculator(number1, number2, operate)
 
