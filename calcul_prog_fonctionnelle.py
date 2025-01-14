@@ -84,56 +84,49 @@ try :
                 #I add while True before each input, in order to ask the user to try again, if the entered value is not valid
                 print(f"Please Choose B for basic calculators and S for scientific one")
                 choice1 = input(f"Do you want to active 'B' or 'S' ? ").strip().upper()
-                
+
                 if choice1 == 'B' :
-                    
                     operate = input(f"Enter the operation symbol '+'  '-'  'x'  '/'  '//'  '%' : ").strip()
                     number1 = float(input(f"Enter a first number a : "))
                     number2 = float(input(f"Enter a second number b : "))
                     result1 = basic_calculator(number1, number2, operate)
                     print(f"The result of the operation : {number1} {operate} {number2} = {result1}")
-                
-                elif choice1 == 'S' :
                     
+                elif choice1 == 'S' :
                     print(f"Please choose Trigo to operate with trigonometrical function else choose other")
                     choice2 = input(f"Do you want to operate with 'Trigo' or 'other' ? ").strip().lower()
 
                     if choice2 == 'trigo' :
-                        while True :
-                            print(f"Choose 'TF' if you want to operate with trigonometrical functions")
-                            print(f"Choose 'TIF' if you want to operate with trigonometrical inverse functions")
-                            choice3 = input(f" Do you want 'TF' or 'TIF' ? ").strip().upper()
+                        print(f"Choose 'TF' if you want to operate with trigonometrical functions")
+                        print(f"Choose 'TIF' if you want to operate with trigonometrical inverse functions")
+                        choice3 = input(f" Do you want 'TF' or 'TIF' ? ").strip().upper()
 
-                            if choice3 == 'TF' :
-                                while True :
-                                    operate = input(f"Enter the operation symbol 'cos'  'sin'  'tan'   'cosh'  'sinh'  'tanh' : ").strip()
-                                    number = float(input(f"Enter a number of your choice n : "))
-                                    result2 = science_calculator(np.radians(number), operate)
-                                    if np.abs(result2) < 1e-10 :
-                                        result2 = 0.0  #because in python for example cos(pi/2) != 0 exactly
-                                    print(f"The result of the operation : {operate}({number}) = {result2}")
+                        if choice3 == 'TF' :
+                            operate = input(f"Enter the operation symbol 'cos'  'sin'  'tan'   'cosh'  'sinh'  'tanh' : ").strip()
+                            number = float(input(f"Enter a number of your choice n : "))
+                            result2 = science_calculator(np.radians(number), operate)
+                            if np.abs(result2) < 1e-10 :
+                                result2 = 0.0  #because in python for example cos(pi/2) != 0 exactly
+                            print(f"The result of the operation : {operate}({number}) = {result2}")
 
-                            elif choice3 == 'TIF' :
-                                operate = input(f"Enter the operation symbol 'arccos'  'arcsin'  'arctan'  'arccosh' 'arcsinh'  'arctanh' : ").strip()
-                                number = float(input(f"Enter a number of your choice n : "))
-                                result3 = science_calculator(number, operate)
-                                print(f"The result of the operation : {operate}({number}) = {result3}")
+                        elif choice3 == 'TIF' :
+                            operate = input(f"Enter the operation symbol 'arccos'  'arcsin'  'arctan'  'arccosh' 'arcsinh'  'arctanh' : ").strip()
+                            number = float(input(f"Enter a number of your choice n : "))
+                            result3 = science_calculator(number, operate)
+                            print(f"The result of the operation : {operate}({number}) = {result3}")
 
                     elif choice2 == 'other' :
-                        while True :
-                            operate = input(f"Enter the operation symbol 'log'  'ln'  'exp'  'abs'  'root' : ").strip()
-                            number = float(input(f"Enter a number of your choice n : "))
-                            result4 = science_calculator(number, operate)
-                            print(f"The result of the operation : {operate}({number}) = {result4}")
+                        operate = input(f"Enter the operation symbol 'log'  'ln'  'exp'  'abs'  'root' : ").strip()
+                        number = float(input(f"Enter a number of your choice n : "))
+                        result4 = science_calculator(number, operate)
+                        print(f"The result of the operation : {operate}({number}) = {result4}")
 
                     else :
                         print(f"Invalide choice. Please enter 'trigonometrical' or 'other")
-                        break
                         
 
                 else :
                     print(f"Invalide choice. Please enter 'basic' or 'scientific")
-                    
 
                     
 
