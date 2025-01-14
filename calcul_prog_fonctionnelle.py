@@ -38,6 +38,14 @@ def calculator(a, b, operator) :
         else :
             print(f"Enter another number (b) not nul") 
 
+    print(f"The result of this operation is :{result}")
+
     ##Add the numpy functions : cos, sin, log, exp n! .....
 
 #Ask the use the enter the values and the operator :
+
+number1 = int(input(f"Enter a first number a : "))
+number2 = int(input(f"Enter a second number b : "))
+operate = input(f"Enter the operation symbol '+'  '-'  '*'  '/'  '//'  '%' : ")
+
+operation_result = calculator(number1, number2, operate)
