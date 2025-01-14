@@ -41,31 +41,34 @@ def science_calculator(a, operator) :
     #The operator will be the key and the operation its value
     operators = {
         #the trigonometrical functions
-        'cos' : np.cos(a), 
-        'sin' : np.sin(a),
-        'tan' : np.tan(a),
+        'cos' : lambda: np.cos(a), 
+        'sin' : lambda: np.sin(a),
+        'tan' : lambda: np.tan(a),
         #the trigonometrical inverse functions
-        'arccos' : np.arccos(a), 
-        'arcsin' : np.arcsin(a),
-        'arctan' : np.arctan(a),
+        'arccos' : lambda: np.arccos(a), 
+        'arcsin' : lambda: np.arcsin(a),
+        'arctan' : lambda: np.arctan(a),
         #the hyperbolic functions
-        'cosh' : np.cosh(a),
-        'sinh' : np.sinh(a),
-        'tanh' : np.tanh(a),
+        'cosh' : lambda: np.cosh(a),
+        'sinh' : lambda: np.sinh(a),
+        'tanh' : lambda: np.tanh(a),
         #the hyperbolic inverse functions
-        'arccosh' : np.arccosh(a),
-        'arcsinh' : np.arcsinh(a),
-        'arctanh' : np.arctanh(a),
+        'arccosh' : lambda: np.arccosh(a),
+        'arcsinh' : lambda: np.arcsinh(a),
+        'arctanh' : lambda: np.arctanh(a),
         #other functions
-        'log' : np.log10(a) if a >= 0 else 'Error: Negative value',
-        'ln' : np.log(a) if a >= 0 else 'Error: Negative value',
-        'exp' : np.exp(a),
-        'abs' : np.abs(a),
-        'root' : np.sqrt(a) if a >= 0 else 'Error: Negative value below the root',
+        'log' : lambda: np.log10(a) if a >= 0 else 'Error: Negative value',
+        'ln' : lambda: np.log(a) if a >= 0 else 'Error: Negative value',
+        'exp' : lambda: np.exp(a),
+        'abs' : lambda: np.abs(a),
+        'root' : lambda: np.sqrt(a) if a >= 0 else 'Error: Negative value below the root',
     }
+    #If we create the dictionnary in this way : dict ={'cos' : np.cos(a)}, that means that this operation is done before we call it in the input bloc
+    #The solution is to make these functions (operators) as a lambda function or like a reference, then at the end we put it like an arguments in operators.get()
 
-    return f"The result of this operation is :{operators.get(operator, "opérateur invalide")}"
-
+    result = operators.get(operator, lambda: "Unfound operation")()  #execute the lambda function
+    return f"The result of this operation is : {result}"
+     #the programm recuperate the key : operator from the dictionnary operators, if the operator doen't exist, the function return : Unfound operation
 
 #Ask the use the enter the values 
 try :
