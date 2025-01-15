@@ -82,7 +82,8 @@ try :
 
             while True : #when the entered value or symbol is not valid, there is a printed message but I want that my programme is executed again to allow the user to enter the values or the symbols again
                 #I add while True before each input, in order to ask the user to try again, if the entered value is not valid
-                print(f"Please Choose B for basic calculators and S for scientific one")
+                print(f"1 - Choose 'B' for basic calculators")
+                print(f"2 - Choose 'S' for scientific calculator")
                 choice1 = input(f"Do you want to active 'B' or 'S' ? ").strip().upper()
 
                 if choice1 == 'B' :
@@ -101,7 +102,7 @@ try :
                         if choice2 == 'trigo' :
 
                             while True : 
-                                print(f"Choose 'TF' if you want to operate with trigonometrical functions")
+                                print(f"1 - Choose 'TF' if you want to operate with trigonometrical functions")
                                 print(f"Choose 'TIF' if you want to operate with trigonometrical inverse functions")
                                 choice3 = input(f" Do you want 'TF' or 'TIF' ? ").strip().upper()
 
