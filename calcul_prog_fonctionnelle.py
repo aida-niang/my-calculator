@@ -83,11 +83,12 @@ try :
             
             
             print(f"\n--- Welcome to our calculators !---\n")
+            print(f"\n1 - Choose 'B' for basic calculators")
+            print(f"\n2 - Choose 'S' for scientific calculator")
 
             while True : #when the entered value or symbol is not valid, there is a printed message but I want that my programme is executed again to allow the user to enter the values or the symbols again
                 #I add while True before each input, in order to ask the user to try again, if the entered value is not valid
-                print(f"\n1 - Choose 'B' for basic calculators")
-                print(f"\n2 - Choose 'S' for scientific calculator")
+                
                 choice1 = input(f"Do you want to active 'B' or 'S' ? ").strip().upper()
 
                 if choice1 == 'B' :
@@ -99,16 +100,19 @@ try :
                     
                 elif choice1 == 'S' :
 
+                    print(f"\n3 - Choose Trigo to operate with trigonometrical")
+                    print(f"\n4 - Choose Other for other scientific operations")
+
                     while True : 
-                        print(f"\n3 - Choose Trigo to operate with trigonometrical")
-                        print(f"\n4 - Choose Other for other scientific operations")
+                        
                         choice2 = input(f"\n- Do you want to operate with 'Trigo' or 'other' ? ").strip().lower()
 
                         if choice2 == 'trigo' :
 
+                            print(f"\n5 - Choose 'TF' if you want to operate with trigonometrical functions")
+                            print(f"\n6 - Choose 'TIF' if you want to operate with trigonometrical inverse functions")
                             while True : 
-                                print(f"\n5 - Choose 'TF' if you want to operate with trigonometrical functions")
-                                print(f"\n6 - Choose 'TIF' if you want to operate with trigonometrical inverse functions")
+                                
                                 choice3 = input(f" Do you want 'TF' or 'TIF' ? ").strip().upper()
 
                                 if choice3 == 'TF' :
@@ -128,7 +132,7 @@ try :
                                     break 
 
                                 else :
-                                    print(f"Invalide choice. Please enter 'trigonometrical' or 'other")
+                                    print(f"Invalide choice. Please enter 'TF' or 'TFI")
 
                                     
 
@@ -141,13 +145,13 @@ try :
                             break 
 
                         else :
-                            print(f"Invalide choice. Please enter 'trigonometrical' or 'other")
+                            print(f"Invalide choice. Please enter 'trigo' or 'other' ")
 
 
                     break    
 
                 else :
-                    print(f"Invalide choice. Please enter 'basic' or 'scientific")
+                    print(f"Invalide choice. Please enter 'B' or 'S' ")
 
 
 
