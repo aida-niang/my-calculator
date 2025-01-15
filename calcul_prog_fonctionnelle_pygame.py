@@ -1,8 +1,10 @@
 #import the necessary libraries :
 import numpy as np
 import matplotlib.pyplot as plt
+import pygame
 
-
+#initialise the state of the calculator in order to ask the user if he wants to run again the calculators :
+state = False
 
 ########################################################################
 #define the functions :
@@ -84,7 +86,7 @@ try :
             
             print(f"\n--- Welcome to our calculators !---\n")
 
-            while True : #when the entered value or symbol is not valid, there is a printed message but I want that my programme is executed again to allow the user to enter the values or the symbols again
+            while state : #when the entered value or symbol is not valid, there is a printed message but I want that my programme is executed again to allow the user to enter the values or the symbols again
                 #I add while True before each input, in order to ask the user to try again, if the entered value is not valid
                 print(f"\n1 - Choose 'B' for basic calculators")
                 print(f"\n2 - Choose 'S' for scientific calculator")
@@ -128,7 +130,7 @@ try :
                                     break 
 
                                 else :
-                                    print(f"Invalide choice. Please enter 'trigonometrical' or 'other")
+                                    print(f"Invalide choice. Please enter 'TF' or 'TFI")
 
                                     
 
@@ -141,13 +143,13 @@ try :
                             break 
 
                         else :
-                            print(f"Invalide choice. Please enter 'trigonometrical' or 'other")
+                            print(f"Invalide choice. Please enter 'trigo' or 'other")
 
 
                     break    
 
                 else :
-                    print(f"Invalide choice. Please enter 'basic' or 'scientific")
+                    print(f"Invalide choice. Please enter 'B' or 'S' ")
 
 
 
