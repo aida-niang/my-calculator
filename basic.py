@@ -1,4 +1,18 @@
+def get_number(numbers):  # to get a valid number from the user
+    while True:
+        try: 
+            return float(input(numbers))
+        except ValueError:
+            print("Invalid input. Please enter a valid number.")
 
+def get_operator(operator):  # to get a valid operator from the user
+    while True:
+        operator = input("Enter the operator: +, -, *, ÷(/): ").strip()
+        if operator in ['+', '-', '*', '/', '÷']:
+            return operator
+        else:
+            print("Invalid operator. Please choose from: +, -, *, ÷(/)")
+            
 def basic_calculator():
     while True:
         try:
