@@ -55,6 +55,9 @@ def basic_calculator():
                 
                 # Display the result
                 print(f"Result: {number1} {operator} {number2} = {result}")
+                
+                # Save to history
+                save_to_history(f"{number1} {operator} {number2} = {result}")
         
         except Exception as e:
             print(f"An unexpected error occurred: {e}")
@@ -108,20 +111,20 @@ def scientific_calculator():
 
             # Display the result
             print(f"Result: {result}")
+            
+            # Save to history
+            save_to_history(f"{operator}({base if operator == '**' else number}) = {result}")
         
         except Exception as e:
             print(f"An unexpected error occurred: {e}")
         
         # Ask if the user wants to continue
-        while True:
-            choice = input("Do you want to perform another scientific calculation? (yes/no): ").strip().lower()
-            if choice == 'yes':
-                scientific_calculator()
-            elif choice == 'no':
-                print("Exiting the Scientist Calculator. Goodbye!")
-                break  # Quit the loop to end
-            else:
-                print("Invalid input. Please choose 'yes' or 'no'.")
+        choice = input("Do you want to perform another scientific calculation? (yes/no): ").strip().lower()
+        if choice == 'no':
+            print("Exiting the Scientific Calculator. Goodbye!")
+            break
+        elif choice != 'yes':
+            print("Invalid input. Please choose 'yes' or 'no'.")
 
 def multi_number_calculator():
     """Multi-Number calculator function for multiple operations in one input."""
@@ -196,6 +199,9 @@ def multi_number_calculator():
             # Display the result with all operations
             operation_string = ' '.join(operations)  # Join the operations string properly
             print(f"Final result: {operation_string} = {result}")
+            
+            # Save to history
+            save_to_history(f"{operation_string} = {result}")
 
             # Ask if the user wants to perform another multi-number calculation
             continue_choice = input("Do you want to perform another multi-number calculation? (yes/no): ").strip().lower()
@@ -229,6 +235,14 @@ def read_history():
     except Exception as e:
         print(f"An error occurred while reading history: {e}")
 
+def clear_history():
+    """Efface l'historique."""
+    try:
+        with open("calculator_history.txt", "w") as file:
+            file.truncate(0)
+        print("History cleared successfully.")
+    except Exception as e:
+        print(f"An error occurred while clearing history: {e}")
 
 def main():
     """Main function to choose between basic, scientific, or multi-number calculators."""
@@ -242,11 +256,15 @@ def main():
             scientific_calculator()
         elif choice == "multi-number":
             multi_number_calculator()
+        elif choice == "history":
+            read_history()  # Afficher l'historique
+        elif choice == "clear_history":
+            clear_history()  # Effacer l'historique
         elif choice == "exit":
             print("Goodbye!")
             break
         else:
-            print("Invalid choice. Please select 'basic', 'scientific', 'multi-number', or type 'exit' to quit.")
+            print("Invalid choice. Please select 'basic', 'scientific', 'multi-number', 'history', 'clear_history', or type 'exit' to quit.")
 
 # Run the main program
 if __name__ == "__main__":
