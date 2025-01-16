@@ -14,52 +14,97 @@ def get_operator(prompt):
             return operator
         print("Invalid operator. Please choose a valid operator.")
 
-def perform_operation(number1, number2, operator):
-    """Perform the arithmetic operation between two numbers."""
-    if operator == "+":
-        return number1 + number2
-    elif operator == "-":
-        return number1 - number2
-    elif operator == "*":
-        return number1 * number2
-    elif operator in ['/', '÷']:
-        if number2 == 0:
-            raise ValueError("Cannot divide by zero.")
-        return number1 / number2
-    elif operator == "%":
-        return number1 % number2
-
 def multi_number_calculator():
     """Multi-Number calculator function for multiple operations in one input."""
     print("\nWelcome to the Multi-Number Calculator!")
-    print("You can now enter a combination of numbers and operators.")
+    print("You must enter at least 3 numbers and 2 operators.")
     
     while True:
         try:
-            # Start by asking the user for the first number
+            # Get the first number
             number1 = get_number("Enter the first number: ")
+            numbers = [number1]
+            operators = []
+            operations = [str(number1)]
 
             # Get the first operator
             operator = get_operator("Enter the operator (+, -, *, ÷, %): ")
+            operators.append(operator)
 
             # Get the second number
             number2 = get_number("Enter the second number: ")
+            numbers.append(number2)
+            operations.append(f" {operator} {number2}")
 
-            # Perform the first operation
-            result = perform_operation(number1, number2, operator)
+            # Get the second operator
+            operator = get_operator("Enter the operator (+, -, *, ÷, %): ")
+            operators.append(operator)
 
-            print(f"Result so far: {number1} {operator} {number2} = {result}")
-            
-            # Continue asking for more numbers and operators
+            # Get the third number (to ensure minimum 3 numbers)
+            number3 = get_number("Enter the third number: ")
+            numbers.append(number3)
+            operations.append(f" {operator} {number3}")
+
+            # Now that we have at least 3 numbers, let's start the calculation
+            if operators[0] == "+":
+                result = number1 + number2
+            elif operators[0] == "-":
+                result = number1 - number2
+            elif operators[0] == "*":
+                result = number1 * number2
+            elif operators[0] in ['/', '÷']:
+                if number2 == 0:
+                    raise ValueError("Cannot divide by zero.")
+                result = number1 / number2
+            elif operators[0] == "%":
+                result = number1 % number2
+
+            print(f"Result so far: {result} {operators[0]} {number2}")
+
+            # Perform the calculation after getting the third number
+            if operators[1] == "+":
+                result += number3
+            elif operators[1] == "-":
+                result -= number3
+            elif operators[1] == "*":
+                result *= number3
+            elif operators[1] in ['/', '÷']:
+                if number3 == 0:
+                    raise ValueError("Cannot divide by zero.")
+                result /= number3
+            elif operators[1] == "%":
+                result %= number3
+
+            print(f"Result so far: {result} {operators[1]} {number3}")
+
+            # Continue asking for more numbers and operators after the third one
             while True:
                 continue_calculation = input("Do you want to add another number? (yes/no): ").strip().lower()
                 if continue_calculation == 'yes':
                     operator = get_operator("Enter the next operator (+, -, *, ÷, %): ")
+                    operators.append(operator)
                     number = get_number("Enter the next number: ")
-                    result = perform_operation(result, number, operator)
+                    numbers.append(number)
+                    operations.append(f" {operator} {number}")
+                    
+                    # Perform the calculation after each new number and operator
+                    if operator == "+":
+                        result += number
+                    elif operator == "-":
+                        result -= number
+                    elif operator == "*":
+                        result *= number
+                    elif operator in ['/', '÷']:
+                        if number == 0:
+                            raise ValueError("Cannot divide by zero.")
+                        result /= number
+                    elif operator == "%":
+                        result %= number
                     print(f"Result so far: {result}")
                 elif continue_calculation == 'no':
-                    print(f"Final result: {result}")
+                    # Display the full expression
+                    operation_string = ''.join(operations)
+                    print(f"Final result: {operation_string} = {result}")
                     break
                 else:
                     print("Invalid input. Please enter 'yes' or 'no'.")
@@ -94,7 +139,18 @@ def basic_calculator():
                 number2 = get_number("Enter the second number: ")
                 
                 # Perform the operation
-                result = perform_operation(number1, number2, operator)
+                if operator == "+":
+                    result = number1 + number2
+                elif operator == "-":
+                    result = number1 - number2
+                elif operator == "*":
+                    result = number1 * number2
+                elif operator in ['/', '÷']:
+                    if number2 == 0:
+                        raise ValueError("Cannot divide by zero.")
+                    result = number1 / number2
+                elif operator == "%":
+                    result = number1 % number2
                 
                 # Display the result
                 print(f"Result: {number1} {operator} {number2} = {result}")
@@ -173,9 +229,9 @@ def main():
         choice = input("Select the type of calculator: basic, scientific, multi-number, or type 'exit' to quit: ").strip().lower()
         
         if choice == "basic":
-            basic_calculator()  # You would have this function implemented earlier
+            basic_calculator()
         elif choice == "scientific":
-            scientific_calculator()  # You would have this function implemented earlier
+            scientific_calculator()
         elif choice == "multi-number":
             multi_number_calculator()
         elif choice == "exit":
