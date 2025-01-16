@@ -111,7 +111,8 @@ def calculator_three(a, b, c, operator1, operator2) :
 
     return result 
 
-
+def advanced_calculator() :
+    
 
 ###########################################################################################################""
 
