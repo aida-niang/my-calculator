@@ -205,8 +205,9 @@ def clear_history():
     except Exception as e:
         print(f"An error occurred while clearing history: {e}")
 
-#Main Menu for options
-def display_menu():
+
+def display_menu(): 
+    """Main Menu for options"""
     print("\nWelcome to My Calculator!")
     print("\n=== Menu ===")
     print("1. Basic Calculator")
@@ -225,9 +226,9 @@ def main():
         elif choice == "2":
             scientific_calculator()
         elif choice == "4":
-            read_history()  # Afficher l'historique
+            read_history()  
         elif choice == "5":
-            clear_history()  # Effacer l'historique
+            clear_history()  
         elif choice == "6":
             print("Goodbye!")
             break
