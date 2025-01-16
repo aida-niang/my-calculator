@@ -213,6 +213,21 @@ def save_to_history(operation):
     except Exception as e:
         print(f"An error occurred while saving to history: {e}")
 
+def read_history():
+    """Lit et affiche l'historique des opérations."""
+    try:
+        with open("calculator_history.txt", "r") as file:
+            history = file.readlines()
+            if not history:
+                print("No operations in history.")
+            else:
+                print("History of operations:")
+                for line in history:
+                    print(line.strip())
+    except FileNotFoundError:
+        print("No history file found.")
+    except Exception as e:
+        print(f"An error occurred while reading history: {e}")
 
 
 def main():
