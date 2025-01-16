@@ -145,6 +145,7 @@ def scientific_calculator(function, value):
 
 def evaluate_expression(expression):
     elements = expression.split()
+    """to use multiple value for the calcul"""
 
     i = 0
     while i < len(elements):
