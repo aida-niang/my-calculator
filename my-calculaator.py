@@ -126,52 +126,90 @@ def scientific_calculator():
         elif choice != 'yes':
             print("Invalid input. Please choose 'yes' or 'no'.")
 
-def scientific_calculator(function, value):
-    try:
-        if function == 'sin':
-            return sin_degrees(value)
-        elif function == 'cos':
-            return cos_degrees(value)
-        elif function == 'tan':
-            return tan_degrees(value)
-        elif function == 'log':
-            return log_base_e(value)
-        elif function == 'sqrt':
-            return sqrt(value)
-        else:
-            raise ValueError(f"Invalid scientific function: {function}")
-    except ValueError as e:
-        raise ValueError(e)
+def multi_number_calculator():
+    """Multi-Number calculator function for multiple operations in one input."""
+    print("\nWelcome to the Multi-Number Calculator!")
+    print("You must enter at least 3 numbers and 2 operators.")
+    
+    while True:
+        try:
+            # Get the first number
+            number1 = get_number("Enter the first number: ")
+            numbers = [number1]
+            operators = []
+            operations = [str(number1)]
 
-def evaluate_expression(expression):
-    elements = expression.split()
-    """to use multiple value for the calcul"""
+            # Get the first operator
+            operator = get_operator("Enter the operator (+, -, *, ÷, %): ")
+            operators.append(operator)
 
-    i = 0
-    while i < len(elements):
-        if elements[i] in ('*', '/'):
-            operator = elements[i]
-            a = float(elements[i - 1])
-            b = float(elements[i + 1])
-            result = apply_operation(a, b, operator)
-            elements[i - 1:i + 2] = [str(result)]
-            i -= 1
-        else:
-            i += 1
+            # Get the second number
+            number2 = get_number("Enter the second number: ")
+            numbers.append(number2)
+            operations.append(f" {operator} {number2}")
 
-    i = 0
-    while i < len(elements):
-        if elements[i] in ('+', '-'):
-            operator = elements[i]
-            a = float(elements[i - 1])
-            b = float(elements[i + 1])
-            result = apply_operation(a, b, operator)
-            elements[i - 1:i + 2] = [str(result)]
-            i -= 1
-        else:
-            i += 1
+            # Get the second operator
+            operator = get_operator("Enter the operator (+, -, *, ÷, %): ")
+            operators.append(operator)
 
-    return float(elements[0])
+            # Get the third number (to ensure minimum 3 numbers)
+            number3 = get_number("Enter the third number: ")
+            numbers.append(number3)
+            operations.append(f" {operator} {number3}")
+
+            # Ask if the user wants to add more numbers
+            while True:
+                add_more = input("Do you want to add more numbers? (yes/no): ").strip().lower()
+                if add_more == 'yes':
+                    # Get the new operator and number
+                    operator = get_operator("Enter the operator (+, -, *, ÷, %): ")
+                    number = get_number("Enter the next number: ")
+                    
+                    # Append the operator and number to the lists
+                    numbers.append(number)
+                    operators.append(operator)
+                    operations.append(f" {operator} {number}")
+                elif add_more == 'no':
+                    break
+                else:
+                    print("Invalid input. Please type 'yes' or 'no'.")
+
+            # Perform the calculation in order of precedence (multiplication/division first)
+            while True:
+                # Loop to handle multiplication/division first
+                for i in range(len(operators)):
+                    if operators[i] in ['*', '/', '÷', '%']:
+                        result = apply_operation(numbers[i], numbers[i + 1], operators[i])
+                        numbers[i + 1] = result
+                        operators.pop(i)
+                        numbers.pop(i)
+                        
+                        # Rebuild the operations string
+                        operations = [f"{num} {op}" for num, op in zip(numbers, operators)]
+                        operations.insert(0, str(numbers[0]))  # Make sure to add the first number at the start
+                        break
+                else:
+                    break
+
+            # Now process the remaining operations (addition/subtraction)
+            result = numbers[0]
+            for i in range(len(operators)):
+                result = apply_operation(result, numbers[i + 1], operators[i])
+
+            # Display the result with all operations
+            operation_string = ' '.join(operations)  # Join the operations string properly
+            print(f"Final result: {operation_string} = {result}")
+            
+            # Save to history
+            save_to_history(f"{operation_string} = {result}")
+
+            # Ask if the user wants to perform another multi-number calculation
+            continue_choice = input("Do you want to perform another multi-number calculation? (yes/no): ").strip().lower()
+            if continue_choice == 'no':
+                print("Exiting the Multi-Number Calculator. Goodbye!")
+                break
+        except Exception as e:
+            print(f"An error occurred: {e}")
 
 def save_to_history(operation):
     """“Saves the operation in the history file."""
@@ -213,6 +251,7 @@ def display_menu():
     print("\n=== Menu ===")
     print("1. Basic Calculator")
     print("2. Scientific Calculator")
+    print("3. Multi-Number Calculator")
     print("4. View History")
     print("5. Clear History")
     print("6. Exit")
@@ -226,6 +265,8 @@ def main():
             basic_calculator()
         elif choice == "2":
             scientific_calculator()
+        elif choice == "3":
+            multi_number_calculator()
         elif choice == "4":
             read_history()  
         elif choice == "5":
