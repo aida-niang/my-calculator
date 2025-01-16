@@ -270,7 +270,16 @@ def main():
         elif choice == "4":
             read_history()  
         elif choice == "5":
-            clear_history()  
+            while True:  # Boucle pour reposer la question en cas d'entrée invalide
+                confirm = input("Do you really want to clear the history? (yes/no): ").strip().lower()
+                if confirm == "yes":
+                    clear_history()
+                    break  # Sort de la boucle une fois l'action terminée
+                elif confirm == "no":
+                    print("History not cleared.")
+                    break  # Sort de la boucle si l'utilisateur refuse de supprimer
+                else:
+                    print("Invalid input. Please type 'yes' or 'no'.")
         elif choice == "6":
             print("Goodbye!")
             break
