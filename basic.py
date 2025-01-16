@@ -120,12 +120,21 @@ def scientific_calculator():
                 print("Invalid input. Please choose 'yes' or 'no'.")
 
 def main():
-    # Main function to run the Basic Calculator
-    print("\nWelcome to the Basic Calculator!")
-    print("Available operators are: +, -, *, ÷(/), %")
-    
-    # Start the calculator
-    basic_calculator()
+    # Main function to choose between basic and scientific calculators
+    while True:
+        print("\nWelcome to My Calculator!")
+        choice = input("Select the type of calculator: basic or scientist (or type 'exit' to quit): ").strip().lower()
+        
+        if choice == "basic":
+            basic_calculator()
+        elif choice == "scientist":
+            scientific_calculator()
+        elif choice == "exit":
+            print("Goodbye!")
+            break
+        else:
+            # Handle invalid choices
+            print("Invalid choice. Please select either 'basic', 'scientist', or type 'exit' to quit.")
 
 # Run the main program
 if __name__ == "__main__":
