@@ -14,108 +14,20 @@ def get_operator(prompt):
             return operator
         print("Invalid operator. Please choose a valid operator.")
 
-def multi_number_calculator():
-    """Multi-Number calculator function for multiple operations in one input."""
-    print("\nWelcome to the Multi-Number Calculator!")
-    print("You must enter at least 3 numbers and 2 operators.")
-    
-    while True:
-        try:
-            # Get the first number
-            number1 = get_number("Enter the first number: ")
-            numbers = [number1]
-            operators = []
-            operations = [str(number1)]
-
-            # Get the first operator
-            operator = get_operator("Enter the operator (+, -, *, ÷, %): ")
-            operators.append(operator)
-
-            # Get the second number
-            number2 = get_number("Enter the second number: ")
-            numbers.append(number2)
-            operations.append(f" {operator} {number2}")
-
-            # Get the second operator
-            operator = get_operator("Enter the operator (+, -, *, ÷, %): ")
-            operators.append(operator)
-
-            # Get the third number (to ensure minimum 3 numbers)
-            number3 = get_number("Enter the third number: ")
-            numbers.append(number3)
-            operations.append(f" {operator} {number3}")
-
-            # Now that we have at least 3 numbers, let's start the calculation
-            if operators[0] == "+":
-                result = number1 + number2
-            elif operators[0] == "-":
-                result = number1 - number2
-            elif operators[0] == "*":
-                result = number1 * number2
-            elif operators[0] in ['/', '÷']:
-                if number2 == 0:
-                    raise ValueError("Cannot divide by zero.")
-                result = number1 / number2
-            elif operators[0] == "%":
-                result = number1 % number2
-
-            print(f"Result so far: {result} {operators[0]} {number2}")
-
-            # Perform the calculation after getting the third number
-            if operators[1] == "+":
-                result += number3
-            elif operators[1] == "-":
-                result -= number3
-            elif operators[1] == "*":
-                result *= number3
-            elif operators[1] in ['/', '÷']:
-                if number3 == 0:
-                    raise ValueError("Cannot divide by zero.")
-                result /= number3
-            elif operators[1] == "%":
-                result %= number3
-
-            print(f"Result so far: {result} {operators[1]} {number3}")
-
-            # Continue asking for more numbers and operators after the third one
-            while True:
-                continue_calculation = input("Do you want to add another number? (yes/no): ").strip().lower()
-                if continue_calculation == 'yes':
-                    operator = get_operator("Enter the next operator (+, -, *, ÷, %): ")
-                    operators.append(operator)
-                    number = get_number("Enter the next number: ")
-                    numbers.append(number)
-                    operations.append(f" {operator} {number}")
-                    
-                    # Perform the calculation after each new number and operator
-                    if operator == "+":
-                        result += number
-                    elif operator == "-":
-                        result -= number
-                    elif operator == "*":
-                        result *= number
-                    elif operator in ['/', '÷']:
-                        if number == 0:
-                            raise ValueError("Cannot divide by zero.")
-                        result /= number
-                    elif operator == "%":
-                        result %= number
-                    print(f"Result so far: {result}")
-                elif continue_calculation == 'no':
-                    # Display the full expression
-                    operation_string = ''.join(operations)
-                    print(f"Final result: {operation_string} = {result}")
-                    break
-                else:
-                    print("Invalid input. Please enter 'yes' or 'no'.")
-            
-            # Ask the user if they want to perform another calculation
-            continue_choice = input("Do you want to perform another multi-number calculation? (yes/no): ").strip().lower()
-            if continue_choice == 'no':
-                print("Exiting the Multi-Number Calculator. Goodbye!")
-                break
-        except Exception as e:
-            print(f"An error occurred: {e}")
+def apply_operation(num1, num2, operator):
+    """Applies the operation between two numbers."""
+    if operator == "+":
+        return num1 + num2
+    elif operator == "-":
+        return num1 - num2
+    elif operator == "*":
+        return num1 * num2
+    elif operator in ['/', '÷']:
+        if num2 == 0:
+            raise ValueError("Cannot divide by zero.")
+        return num1 / num2
+    elif operator == "%":
+        return num1 % num2
 
 def basic_calculator():
     """Basic Calculator function for simple arithmetic operations."""
@@ -139,18 +51,7 @@ def basic_calculator():
                 number2 = get_number("Enter the second number: ")
                 
                 # Perform the operation
-                if operator == "+":
-                    result = number1 + number2
-                elif operator == "-":
-                    result = number1 - number2
-                elif operator == "*":
-                    result = number1 * number2
-                elif operator in ['/', '÷']:
-                    if number2 == 0:
-                        raise ValueError("Cannot divide by zero.")
-                    result = number1 / number2
-                elif operator == "%":
-                    result = number1 % number2
+                result = apply_operation(number1, number2, operator)
                 
                 # Display the result
                 print(f"Result: {number1} {operator} {number2} = {result}")
@@ -221,6 +122,88 @@ def scientific_calculator():
                 break  # Quit the loop to end
             else:
                 print("Invalid input. Please choose 'yes' or 'no'.")
+
+def multi_number_calculator():
+    """Multi-Number calculator function for multiple operations in one input."""
+    print("\nWelcome to the Multi-Number Calculator!")
+    print("You must enter at least 3 numbers and 2 operators.")
+    
+    while True:
+        try:
+            # Get the first number
+            number1 = get_number("Enter the first number: ")
+            numbers = [number1]
+            operators = []
+            operations = [str(number1)]
+
+            # Get the first operator
+            operator = get_operator("Enter the operator (+, -, *, ÷, %): ")
+            operators.append(operator)
+
+            # Get the second number
+            number2 = get_number("Enter the second number: ")
+            numbers.append(number2)
+            operations.append(f" {operator} {number2}")
+
+            # Get the second operator
+            operator = get_operator("Enter the operator (+, -, *, ÷, %): ")
+            operators.append(operator)
+
+            # Get the third number (to ensure minimum 3 numbers)
+            number3 = get_number("Enter the third number: ")
+            numbers.append(number3)
+            operations.append(f" {operator} {number3}")
+
+            # Ask if the user wants to add more numbers
+            while True:
+                add_more = input("Do you want to add more numbers? (yes/no): ").strip().lower()
+                if add_more == 'yes':
+                    # Get the new operator and number
+                    operator = get_operator("Enter the operator (+, -, *, ÷, %): ")
+                    number = get_number("Enter the next number: ")
+                    
+                    # Append the operator and number to the lists
+                    numbers.append(number)
+                    operators.append(operator)
+                    operations.append(f" {operator} {number}")
+                elif add_more == 'no':
+                    break
+                else:
+                    print("Invalid input. Please type 'yes' or 'no'.")
+
+            # Perform the calculation in order of precedence (multiplication/division first)
+            while True:
+                # Loop to handle multiplication/division first
+                for i in range(len(operators)):
+                    if operators[i] in ['*', '/', '÷', '%']:
+                        result = apply_operation(numbers[i], numbers[i + 1], operators[i])
+                        numbers[i + 1] = result
+                        operators.pop(i)
+                        numbers.pop(i)
+                        
+                        # Rebuild the operations string
+                        operations = [f"{num} {op}" for num, op in zip(numbers, operators)]
+                        operations.insert(0, str(numbers[0]))  # Make sure to add the first number at the start
+                        break
+                else:
+                    break
+
+            # Now process the remaining operations (addition/subtraction)
+            result = numbers[0]
+            for i in range(len(operators)):
+                result = apply_operation(result, numbers[i + 1], operators[i])
+
+            # Display the result with all operations
+            operation_string = ' '.join(operations)  # Join the operations string properly
+            print(f"Final result: {operation_string} = {result}")
+
+            # Ask if the user wants to perform another multi-number calculation
+            continue_choice = input("Do you want to perform another multi-number calculation? (yes/no): ").strip().lower()
+            if continue_choice == 'no':
+                print("Exiting the Multi-Number Calculator. Goodbye!")
+                break
+        except Exception as e:
+            print(f"An error occurred: {e}")
 
 def main():
     """Main function to choose between basic, scientific, or multi-number calculators."""
