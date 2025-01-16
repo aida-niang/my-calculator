@@ -212,7 +212,7 @@ def multi_number_calculator():
             print(f"An error occurred: {e}")
 
 def save_to_history(operation):
-    """Sauvegarde l'opération dans le fichier historique."""
+    """“Saves the operation in the history file."""
     try:
         with open("calculator_history.txt", "a") as file:
             file.write(operation + "\n")
@@ -220,7 +220,7 @@ def save_to_history(operation):
         print(f"An error occurred while saving to history: {e}")
 
 def read_history():
-    """Lit et affiche l'historique des opérations."""
+    """Reads and displays transaction history."""
     try:
         with open("calculator_history.txt", "r") as file:
             history = file.readlines()
@@ -236,7 +236,7 @@ def read_history():
         print(f"An error occurred while reading history: {e}")
 
 def clear_history():
-    """Efface l'historique."""
+    """Clear history."""
     try:
         with open("calculator_history.txt", "w") as file:
             file.truncate(0)
