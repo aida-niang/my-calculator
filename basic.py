@@ -1,49 +1,75 @@
-def get_number(numbers):  # to get a valid number from the user
+def get_number(prompt):
+    """
+    Function to get a valid number from the user.
+    Args:
+        prompt (str): The prompt message for input.
+    Returns:
+        float: The valid number entered by the user.
+    """
     while True:
-        try: 
-            return float(input(numbers))
+        try:
+            return float(input(prompt))
         except ValueError:
             print("Invalid input. Please enter a valid number.")
 
-def get_operator(operator):  # to get a valid operator from the user
+def get_operator():
+    """
+    Function to get a valid operator from the user.
+    Returns:
+        str: The valid operator entered by the user.
+    """
     while True:
-        operator = input("Enter the operator: +, -, *, ÷(/): ").strip()
-        if operator in ['+', '-', '*', '/', '÷']:
+        operator = input("Enter the operator (+, -, *, ÷(/), %): ").strip()
+        if operator in ['+', '-', '*', '/', '÷', '%']:
             return operator
-        else:
-            print("Invalid operator. Please choose from: +, -, *, ÷(/)")
-            
+        print("Invalid operator. Please choose from: +, -, *, ÷(/), %.")
+
 def basic_calculator():
+    """
+    Function to perform basic calculations (+, -, *, /, %).
+    """
+    print("\nWelcome to the Basic Calculator!")
+    print("Available operators are: +, -, *, ÷(/), %")
+    
     while True:
         try:
-            # Get valid inputs
+            # Get the first number
             number1 = get_number("Enter the first number: ")
-            operator = get_operator(['+', '-', '*', '÷'])
-            number2 = get_number("Enter the second number: ")
-
-            # Perform the operation
-            if operator == '+':
-                result = number1 + number2
-            elif operator == '-':
-                result = number1 - number2
-            elif operator == '*':
-                result = number1 * number2
-            elif operator in ['/', '÷']:
-                if number2 == 0:
-                    print("Error: Division by zero is not allowed.")
-                    continue
-                result = number1 / number2
-
-            # Display the result
-            print(f"Result: {number1} {operator} {number2} = {result}")
-
+            
+            # Get the operator
+            operator = get_operator()
+            
+            # Handle % operator separately
+            if operator == '%':
+                result = number1 / 100
+                print(f"Result: {number1}% = {result}")
+            else:
+                # Get the second number
+                number2 = get_number("Enter the second number: ")
+                
+                # Perform the operation
+                if operator == '+':
+                    result = number1 + number2
+                elif operator == '-':
+                    result = number1 - number2
+                elif operator == '*':
+                    result = number1 * number2
+                elif operator in ['/', '÷']:
+                    if number2 == 0:
+                        print("Error: Division by zero is not allowed.")
+                        continue
+                    result = number1 / number2
+                
+                # Display the result
+                print(f"Result: {number1} {operator} {number2} = {result}")
+        
         except Exception as e:
             # Handle unexpected errors
             print(f"An unexpected error occurred: {e}")
         
         # Ask if the user wants to continue
         while True:
-            choice = input("Do you want to perform another calculation? (yes/no): ").strip().lower()
+            choice = input("Do you want to perform another basic calculation? (yes/no): ").strip().lower()
             if choice == 'yes':
                 break
             elif choice == 'no':
@@ -53,9 +79,14 @@ def basic_calculator():
                 print("Invalid input. Please choose 'yes' or 'no'.")
 
 def main():
-    # Main function Basic calculator for arithmetic operations
+    """
+    Main function to run the Basic Calculator.
+    """
+    # Display a welcome message
     print("\nWelcome to the Basic Calculator!")
-    print("Available operators are: +, -, *, ÷")
+    print("Available operators are: +, -, *, ÷(/), %")
+    
+    # Start the calculator
     basic_calculator()
 
 # Run the main program
