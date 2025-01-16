@@ -244,23 +244,33 @@ def clear_history():
     except Exception as e:
         print(f"An error occurred while clearing history: {e}")
 
+#Main Menu for options
+def display_menu():
+    print("\nWelcome to My Calculator!")
+    print("\n=== Menu ===")
+    print("1. Basic Calculator")
+    print("2. Scientific Calculator")
+    print("3. Multi-Number Calculator")
+    print("4. View History")
+    print("5. Clear History")
+    print("6. Exit")
+    
 def main():
     """Main function to choose between basic, scientific, or multi-number calculators."""
     while True:
-        print("\nWelcome to My Calculator!")
-        choice = input("Select the type of calculator: basic, scientific, multi-number, or type 'exit' to quit: ").strip().lower()
-        
-        if choice == "basic":
+        display_menu()
+        choice = input("Choose an option (1-6):").strip().lower()
+        if choice == "1":
             basic_calculator()
-        elif choice == "scientific":
+        elif choice == "2":
             scientific_calculator()
-        elif choice == "multi-number":
+        elif choice == "3":
             multi_number_calculator()
-        elif choice == "history":
+        elif choice == "4":
             read_history()  # Afficher l'historique
-        elif choice == "clear_history":
+        elif choice == "5":
             clear_history()  # Effacer l'historique
-        elif choice == "exit":
+        elif choice == "6":
             print("Goodbye!")
             break
         else:
