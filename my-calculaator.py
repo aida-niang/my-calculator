@@ -276,6 +276,9 @@ def main():
         else:
             print("Invalid choice. Please select 'basic', 'scientific', 'multi-number', 'history', 'clear_history', or type 'exit' to quit.")
 
-# Run the main program
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except KeyboardInterrupt:
+        print("\nCtrl + C detected. Exiting the program safely. Goodbye!")
+
