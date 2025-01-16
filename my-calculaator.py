@@ -205,6 +205,16 @@ def multi_number_calculator():
         except Exception as e:
             print(f"An error occurred: {e}")
 
+def save_to_history(operation):
+    """Sauvegarde l'opération dans le fichier historique."""
+    try:
+        with open("calculator_history.txt", "a") as file:
+            file.write(operation + "\n")
+    except Exception as e:
+        print(f"An error occurred while saving to history: {e}")
+
+
+
 def main():
     """Main function to choose between basic, scientific, or multi-number calculators."""
     while True:
