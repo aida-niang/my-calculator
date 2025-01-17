@@ -1,6 +1,6 @@
+
 # Function 1 : test if the user enter a numeric value
 def get_number(prompt):
-    """Prompt the user to enter a valid number."""
     while True:
         try:
             return float(input(prompt))
@@ -10,7 +10,6 @@ def get_number(prompt):
 ###########################################################################################################
 # Function 2 : test if the user enter a valid operator
 def get_operator(prompt):
-    """Prompt the user to enter a valid operator."""
     while True:
         operator = input(prompt).strip()
         if operator in ['+', '-', '*', '/', '÷', '%']:
@@ -20,7 +19,6 @@ def get_operator(prompt):
 ###########################################################################################################
 # Function 3 : Create the 2-variables calculator
 def apply_operation(num1, num2, operator):
-    """Applies the operation between two numbers."""
     if operator == "+":
         return num1 + num2
     elif operator == "-":
@@ -37,7 +35,6 @@ def apply_operation(num1, num2, operator):
 ###########################################################################################################
 # Function 4 : execute the 2-variables calculator
 def basic_calculator():
-    """Basic Calculator function for simple arithmetic operations."""
     print("\nWelcome to the Basic Calculator!")
     print("Available operators are: +, -, *, ÷(/), %")
     
@@ -84,7 +81,6 @@ def basic_calculator():
 ###########################################################################################################
 # Function 5 : execute the scientific calculator
 def scientific_calculator():
-    """Scientific Calculator function for advanced operations."""
     print("\nWelcome to the Scientific Calculator!")
     print("Available operators are: √ (square root), x² (square), sin, cos, tan, ** (power)")
     
@@ -140,7 +136,6 @@ def scientific_calculator():
 ###########################################################################################################
 # Function 6 : execute the n-variables calculator
 def multi_number_calculator():
-    """Multi-Number calculator function for multiple operations in one input."""
     print("\nWelcome to the Multi-Number Calculator!")
     print("You must enter at least 3 numbers and 2 operators.")
     
@@ -228,7 +223,6 @@ def multi_number_calculator():
 ###########################################################################################################
 # Function 7 : Create and save the operation's history
 def save_to_history(operation):
-    """Saves the operation in the history file with the current date and time in French."""
     try:
         history_entry = {operation}
         
@@ -242,7 +236,6 @@ def save_to_history(operation):
 ###########################################################################################################
 # Function 8 : Read the operation's history
 def read_history():
-    """Reads and displays transaction history."""
     try:
         with open("calculator_history.txt", "r") as file:
             history = file.readlines()
@@ -261,7 +254,6 @@ def read_history():
 ###########################################################################################################
 # Function 9 : Clear the operation's history 
 def clear_history():
-    """Clear history."""
     try:
         with open("calculator_history.txt", "w") as file:
             file.truncate(0)
@@ -273,7 +265,6 @@ def clear_history():
 ###########################################################################################################
 # Function 10 : Create a menu to make easy the manipulation of the calculator (for the user)
 def display_menu(): 
-    """Main Menu for options"""
     print("\nWelcome to My Calculator!")
     print("\n=== Menu ===")
     print("1. Basic Calculator")
@@ -287,7 +278,6 @@ def display_menu():
 ###########################################################################################################
 # Function 11 : Active the options depending on the user's choice   
 def main():
-    """Main function to choose between basic, scientific, or multi-number calculators."""
     while True:
         display_menu()
         choice = input("Choose an option (1-6):").strip().lower()
