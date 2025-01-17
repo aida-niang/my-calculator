@@ -1,3 +1,5 @@
+from datetime import datetime
+import locale
 
 # Function 1 : test if the user enter a numeric value
 def get_number(prompt):
@@ -224,7 +226,14 @@ def multi_number_calculator():
 # Function 7 : Create and save the operation's history
 def save_to_history(operation):
     try:
-        history_entry = {operation}
+        # Set the locale to French (France)
+        locale.setlocale(locale.LC_TIME, 'fr_FR.UTF-8')
+        
+        # Get the current date and time in French format
+        current_time = datetime.now().strftime("%A %d %B %Y à %H:%M:%S")
+        
+        # Create the string to save with the timestamp
+        history_entry = f"{current_time} - {operation}"
         
         # Append the operation with timestamp to the history file
         with open("calculator_history.txt", "a") as file:
