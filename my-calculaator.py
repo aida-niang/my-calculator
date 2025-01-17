@@ -212,12 +212,16 @@ def multi_number_calculator():
             print(f"An error occurred: {e}")
 
 def save_to_history(operation):
-    """“Saves the operation in the history file."""
+    """Saves the operation in the history file with the current date and time in French."""
     try:
+        history_entry = {operation}
+        
+        # Append the operation with timestamp to the history file
         with open("calculator_history.txt", "a") as file:
-            file.write(operation + "\n")
+            file.write(history_entry + "\n")
     except Exception as e:
         print(f"An error occurred while saving to history: {e}")
+
 
 def read_history():
     """Reads and displays transaction history."""
@@ -261,15 +265,15 @@ def main():
     while True:
         display_menu()
         choice = input("Choose an option (1-6):").strip().lower()
-        if choice == "1":
+        if choice == "1" or choice =='basic' or choice =='b':
             basic_calculator()
-        elif choice == "2":
+        elif choice == "2" or choice =='scientific' or choice =='s':
             scientific_calculator()
-        elif choice == "3":
+        elif choice == "3" or choice =='multi' or choice =='m':
             multi_number_calculator()
-        elif choice == "4":
+        elif choice == "4" or choice =='history' or choice =='h':
             read_history()  
-        elif choice == "5":
+        elif choice == "5" or choice =='delete' or choice =='d':
             while True:  # Boucle pour reposer la question en cas d'entrée invalide
                 confirm = input("Do you really want to clear the history? (yes/no): ").strip().lower()
                 if confirm == "yes":
@@ -280,7 +284,7 @@ def main():
                     break  # Sort de la boucle si l'utilisateur refuse de supprimer
                 else:
                     print("Invalid input. Please type 'yes' or 'no'.")
-        elif choice == "6":
+        elif choice == "6" or choice == 'exit' or choice == 'e':
             print("Goodbye!")
             break
         else:
@@ -291,4 +295,3 @@ if __name__ == "__main__":
         main()
     except KeyboardInterrupt:
         print("\nCtrl + C detected. Exiting the program safely. Goodbye!")
-        main()
