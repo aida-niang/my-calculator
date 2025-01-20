@@ -137,84 +137,63 @@ def scientific_calculator():
 
 ###########################################################################################################
 # Function 6 : execute the n-variables calculator
+#Function 6 : n-variable calculator
 def multi_number_calculator():
     print("\nWelcome to the Multi-Number Calculator!")
-    print("You must enter at least 3 numbers and 2 operators.")
-    
+    print("You must enter at least 3 numbers and 2 operators !")
+
     while True:
-        try:
-            # Get the first number
-            number1 = get_number("Enter the first number: ")
-            numbers = [number1]
-            operators = []
-            operations = [str(number1)]
+        try :
+            operation = input("Enter your operation (please put space between each term): ")
 
-            # Get the first operator
-            operator = get_operator("Enter the operator (+, -, *, ÷, %): ")
-            operators.append(operator)
+            # Validate input
+            terms = operation.split()
+            if len(terms) < 5 or not all(term.isdigit() or term in ['+', '-', 'x', '/'] for term in terms):
+                print("Invalid input. Please enter a valid operation.")
+                continue
 
-            # Get the second number
-            number2 = get_number("Enter the second number: ")
-            numbers.append(number2)
-            operations.append(f" {operator} {number2}")
+            def evaluate_operator(terms, operator):
+                i = 0
+                while i < len(terms):
+                    if terms[i] == operator:
+                        try:
+                            if operator == 'x':
+                                result = int(terms[i - 1]) * int(terms[i + 1])
+                            elif operator == '/':
+                                if int(terms[i + 1]) == 0:
+                                    raise ZeroDivisionError("Division by zero is not allowed.")
+                                result = int(terms[i - 1]) // int(terms[i + 1])
+                            elif operator == '+':
+                                result = int(terms[i - 1]) + int(terms[i + 1])
+                            elif operator == '-':
+                                result = int(terms[i - 1]) - int(terms[i + 1])
 
-            # Get the second operator
-            operator = get_operator("Enter the operator (+, -, *, ÷, %): ")
-            operators.append(operator)
+                            terms[i - 1] = str(result)
+                            del terms[i:i + 2]
+                            i -= 1
+                        except Exception as e:
+                            print(f"Error: {e}")
+                            return None
+                    else:
+                        i += 1
+                return terms
 
-            # Get the third number (to ensure minimum 3 numbers)
-            number3 = get_number("Enter the third number: ")
-            numbers.append(number3)
-            operations.append(f" {operator} {number3}")
-
-            # Ask if the user wants to add more numbers
-            while True:
-                add_more = input("Do you want to add more numbers? (yes/no): ").strip().lower()
-                if add_more == 'yes':
-                    # Get the new operator and number
-                    operator = get_operator("Enter the operator (+, -, *, ÷, %): ")
-                    number = get_number("Enter the next number: ")
-                    
-                    # Append the operator and number to the lists
-                    numbers.append(number)
-                    operators.append(operator)
-                    operations.append(f" {operator} {number}")
-                elif add_more == 'no':
-                    break
-                else:
-                    print("Invalid input. Please type 'yes' or 'no'.")
-
-            # Perform the calculation in order of precedence (multiplication/division first)
-            while True:
-                # Loop to handle multiplication/division first
-                for i in range(len(operators)):
-                    if operators[i] in ['*', '/', '÷', '%']:
-                        result = apply_operation(numbers[i], numbers[i + 1], operators[i])
-                        numbers[i + 1] = result
-                        operators.pop(i)
-                        numbers.pop(i)
-                        
-                        # Rebuild the operations string
-                        operations = [f"{num} {op}" for num, op in zip(numbers, operators)]
-                        operations.insert(0, str(numbers[0]))  # Make sure to add the first number at the start
-                        break
-                else:
+            for op in ['x', '/', '+', '-']:
+                terms = evaluate_operator(terms, op)
+                if terms is None:
                     break
 
-            # Now process the remaining operations (addition/subtraction)
-            result = numbers[0]
-            for i in range(len(operators)):
-                result = apply_operation(result, numbers[i + 1], operators[i])
+            if terms is None:
+                print("Calculation could not be completed due to an error.")
+                continue
 
-            # Display the result with all operations
-            operation_string = ' '.join(operations)  # Join the operations string properly
-            print(f"Final result: {operation_string} = {result}")
-            
-            # Save to history
-            save_to_history(f"{operation_string} = {result}")
+            result = terms[0]
+            print(f"Result: {result}")
 
-            # Ask if the user wants to perform another multi-number calculation
-            continue_choice = input("Do you want to perform another multi-number calculation? (yes/no): ").strip().lower()
+            save_to_history(f"{operation} = {result}")
+
+            # Ask for continuation
+            continue_choice = input("Do you want to perform another calculation? (yes/no): ").strip().lower()
             if continue_choice == 'no':
                 print("Exiting the Multi-Number Calculator. Goodbye!")
                 break
