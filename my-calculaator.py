@@ -14,7 +14,7 @@ def get_number(prompt):
 def get_operator(prompt):
     while True:
         operator = input(prompt).strip()
-        if operator in ['+', '-', 'x', '/', '÷', '%']:
+        if operator in ['+', '-', 'x', '/', '÷', '%', 'sqrt', '√', 'x²', 'x2', 'sin', 'cos', 'tan', '**']:
             return operator
         print("Invalid operator. Please choose a valid operator.")
 
@@ -188,7 +188,7 @@ def multi_number_calculator():
                 continue
 
             result = terms[0]
-            print(f"Result: {result}")
+            print(f"Result: {operation} = {result}")
 
             save_to_history(f"{operation} = {result}")
 
@@ -277,7 +277,7 @@ def main():
             multi_number_calculator()
         elif choice == "4" or choice =='history' or choice =='h':
             read_history()  
-        elif choice == "5" or choice =='delete' or choice =='d':
+        elif choice == "5" or choice =='clear' or choice =='c':
             while True:  # Boucle pour reposer la question en cas d'entrée invalide
                 confirm = input("Do you really want to clear the history? (yes/no): ").strip().lower()
                 if confirm == "yes":
@@ -289,7 +289,7 @@ def main():
                 else:
                     print("Invalid input. Please type 'yes' or 'no'.")
         elif choice == "6" or choice == 'exit' or choice == 'e':
-            print("Goodbye!")
+            print("Exiting the program safely. Goodbye!")
             break
         else:
             print("Invalid choice. Please select 'basic', 'scientific', 'multi-number', 'history', 'clear_history', or type 'exit' to quit.")
@@ -299,4 +299,5 @@ if __name__ == "__main__":
     try:
         main()
     except KeyboardInterrupt:
-        print("\nCtrl + C detected. Exiting the program safely. Goodbye!")
+        print("\nReturning to the Menu ...")
+        main()
