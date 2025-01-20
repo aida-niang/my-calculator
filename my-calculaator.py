@@ -137,7 +137,7 @@ def scientific_calculator():
 
 ###########################################################################################################
 # Function 6 : execute the n-variables calculator
-#Function 6 : n-variable calculator
+
 def multi_number_calculator():
     print("\nWelcome to the Multi-Number Calculator!")
     print("You must enter at least 3 numbers and 2 operators !")
